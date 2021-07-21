@@ -1,4 +1,4 @@
-import styles from "../styles/Header.module.css";
+import styles from "./Header.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
@@ -14,8 +14,8 @@ const Header = () => (
     <div className={styles.left}>
       <Link href="/">
         <a className={styles.logo}>
-          <Image src="/logo.svg" width="32" height="32" alt="Logo" />
-          <span className={styles.appName}>Your application</span>
+          <Image src="/cars.svg" width="32" height="32" alt="Logo" />
+          <span className={styles.appName}>Type Racer</span>
         </a>
       </Link>
     </div>

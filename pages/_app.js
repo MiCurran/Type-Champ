@@ -1,9 +1,9 @@
-import '../styles/globals.css'
+import '../styles/globals.scss'
 
 import { ClerkProvider, RedirectToSignIn, SignedIn, SignedOut } from '@clerk/clerk-react'
 import { useRouter } from 'next/router'
 
-import Layout from '../components/Layout'
+import Layout from '../components/Layout/Layout'
 
 /**
  * List pages you want to be publicly accessible, or leave empty if
@@ -13,7 +13,7 @@ import Layout from '../components/Layout'
  *  "/foo/bar"       for pages/foo/bar.js
  *  "/foo/[...bar]"  for pages/foo/[...bar].js
  */
-const publicPages = ["/", "/sign-in/[[...index]]", "/sign-up/[[...index]]"];
+const publicPages = ["/", "/sign-in/[[...index]]", "/sign-up/[[...index]]", '/practice'];
 
 const MyApp = ({ Component, pageProps }) => {
   const router = useRouter();
