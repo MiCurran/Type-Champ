@@ -2,11 +2,11 @@ import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { getRandomWordsPhrase } from '../../lib/utils/getRandomWords';
 
-const usePractice = () => {
+const useTest = () => {
     const searchInput = useRef(null);
     const router = useRouter();
     const counterInitState = 30;
-    const [phrase, setPhrase] = useState(getRandomWordsPhrase())
+    const [phrase, setPhrase] = useState(getRandomWordsPhrase(50))
     const [counter, setCounter] = useState(counterInitState);
     const [startTimer, setStartTimer] = useState(false);
     const [expired, setExpired] = useState(false);
@@ -14,12 +14,8 @@ const usePractice = () => {
     const valueArray = value.split('');
     const phraseArray = phrase.split('');
 
-    const randomIntFromInterval = (min, max) => { // min and max included 
-      return Math.floor(Math.random() * (max - min + 1) + min)
-    }
-
     const handleChooseRandomPhrase = () => {
-      setPhrase(getRandomWordsPhrase());
+      setPhrase(getRandomWordsPhrase(50));
       handleReset();
     };
     
@@ -79,9 +75,9 @@ const usePractice = () => {
         wpm,
         expired,
         value,
-        searchInput
+        searchInput,
 
     };
 };
 
-export default usePractice;
+export default useTest;
