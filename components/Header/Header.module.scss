@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   padding: 1rem;
+  background-color: rgb(85, 77, 77);
 }
 
 .logo {
@@ -13,7 +14,8 @@
 .appName {
   margin-left: 12px;
   font-weight: bold;
-  color: #335bf1;
+  font-size: 1.8rem;
+  color: #dcd8e4;
 }
 
 .left,

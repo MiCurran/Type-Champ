@@ -1,14 +1,19 @@
 import Head from "next/head";
 import Link from "next/link";
-import styles from "./Practice.module.scss";
+import styles from "./Test.module.scss";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { useEffect, useState, useRef } from 'react';
 import { useUser } from "@clerk/clerk-react";
 import Image from 'next/image';
-import usePractice from "./usePractice";
+import useTest from "./useTest";
 
-const Practice = (props) => {
-  const {searchInput, startTimer, counter, wpm, expired, value, valueArray, phraseArray, handleChooseRandomPhrase, handleReset, handleValueChange, setStartTimer} = usePractice(props)
+const Test = (props) => {
+  const {searchInput,
+    startTimer,
+    counter,
+    wpm,
+    expired, value, valueArray, phraseArray, handleChooseRandomPhrase, handleReset, handleValueChange, setStartTimer} = useTest(props)
+
 
     return (
   <div className={styles.container}>
@@ -20,9 +25,9 @@ const Practice = (props) => {
         content="width=device-width, initial-scale=1.0"
       ></meta>
     </Head>
-        <h1>Practice Test</h1>
+            <h1>Scored Test</h1>
         <Image className={startTimer && !expired ? `${styles.hourglass} ${styles.spinning}`: `${styles.hourglass} `} src="/icons/hourglass.svg" width="100" height="100" alt="hourglass" />
-        <h3><span className={styles.timer}>{counter}</span> seconds left</h3>
+        <h3 className={counter >= 11 ? `${styles.timer} ${styles.green}` : `${styles.timer} ${styles.red}`}><span>{counter}</span></h3>
         <p>{wpm} this is how many wpm</p>
 
         <textarea
@@ -59,14 +64,14 @@ const Practice = (props) => {
                 if (index === (valueArray.length - 1)){
                   return (
                     <span key={index} className={letter === valueArray[index] ? `${styles.green} ${styles.activeLetter}` : `${styles.red} ${styles.activeLetter}`}>
-                        {letter}
+                        {valueArray[index]}
                     </span>
                   )
                 } 
                 else {
                   return (
                     <span key={index} className={letter === valueArray[index] ? styles.green : styles.red}>
-                    {letter}
+                    {valueArray[index]}
                   </span>
                   )
                 }
@@ -76,12 +81,14 @@ const Practice = (props) => {
         {/* <Highlight className='javascript'>
   {phrase}
 </Highlight> */}
-        <button onClick={() => setStartTimer(!startTimer)}>start/stop timer</button>
+<div className={styles.row}>
+<button onClick={() => setStartTimer(!startTimer)}>start/stop timer</button>
         <button onClick={() => handleReset()}>reset</button>
         <button onClick={() => handleChooseRandomPhrase()}>new test</button>
+</div>
   </div>
 )
 };
 
-export default Practice;
+export default Test;
  
