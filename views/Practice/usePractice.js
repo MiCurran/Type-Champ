@@ -14,10 +14,6 @@ const usePractice = () => {
     const valueArray = value.split('');
     const phraseArray = phrase.split('');
 
-    const randomIntFromInterval = (min, max) => { // min and max included 
-      return Math.floor(Math.random() * (max - min + 1) + min)
-    }
-
     const handleChooseRandomPhrase = () => {
       setPhrase(getRandomWordsPhrase());
       handleReset();
@@ -35,6 +31,7 @@ const usePractice = () => {
 
     const handleValueChange = (value) => {
       setValue(value);
+      // we need to also check here if the last typed character of value 
     };
 
     const handleReset = () => {

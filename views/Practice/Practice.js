@@ -59,14 +59,14 @@ const Practice = (props) => {
                 if (index === (valueArray.length - 1)){
                   return (
                     <span key={index} className={letter === valueArray[index] ? `${styles.green} ${styles.activeLetter}` : `${styles.red} ${styles.activeLetter}`}>
-                        {valueArray[index]}
+                        {letter}
                     </span>
                   )
                 } 
                 else {
                   return (
                     <span key={index} className={letter === valueArray[index] ? styles.green : styles.red}>
-                    {valueArray[index]}
+                    {letter}
                   </span>
                   )
                 }

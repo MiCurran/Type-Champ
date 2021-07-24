@@ -14,8 +14,8 @@ const Header = () => (
     <div className={styles.left}>
       <Link href="/">
         <a className={styles.logo}>
-          <Image src="/cars.svg" width="32" height="32" alt="Logo" />
-          <span className={styles.appName}>Type Racer</span>
+          <Image src="/esports.svg" width="64" height="64" alt="Logo" />
+          <span className={styles.appName}>Type Champ</span>
         </a>
       </Link>
     </div>
