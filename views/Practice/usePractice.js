@@ -6,7 +6,6 @@ import { getLetterColors } from "../../lib/utils/getLetterColors";
 const usePractice = (props) => {
     const { user } = props;
     const searchInput = useRef(null);
-    const router = useRouter();
     const counterInitState = 30;
     const [phrase, setPhrase] = useState(getRandomWordsPhrase())
     const [counter, setCounter] = useState(counterInitState);
@@ -35,20 +34,15 @@ const usePractice = (props) => {
     const [wpm, setWpm] = useState(0);
 
     const handleValueChange = (value) => {
-      const valA = value.split('')
-      if (valA[value.length-1] === phraseArray[value.length - 1]) {
+      const tempVal = value.split('')
+      if (tempVal[value.length-1] === phraseArray[value.length - 1]) {
         const newHits = hits + 1
-        console.log('hit')
         setHits(newHits);
-        // so here we need to do edit a hit state which will be correct letters
       } else {
         const newMisses = misses + 1
-        console.log('miss'); // here we need to add a miss state which will be errored letters 
         setMisses(newMisses);
       }
       setValue(value);
-      // we need to also check here if the last typed character of value 
-
     };
 
     const handleReset = () => {
@@ -67,11 +61,6 @@ const usePractice = (props) => {
       setWpm(determineWPM(value, counter));
       setCounter(counter - 1); 
     }; 
-
-    // if the we have a value at the index return red or green 
-    // if we havent gotten a value there yet it should be gray
-    // this is in the prhrase map
-    // if (value[index] === letter ){ return the colored span}
 
     useEffect(() => {
       if (startTimer === true && expired === false){ 
@@ -97,7 +86,9 @@ const usePractice = (props) => {
         user,
         letterColors,
         hits,
-        misses
+        misses,
+        phrase,
+        value
 
     };
 };

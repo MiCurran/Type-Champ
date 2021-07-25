@@ -6,6 +6,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useUser } from "@clerk/clerk-react";
 import Image from 'next/image';
 import usePractice from "./usePractice";
+import { Stats } from "./components/stats";
 
 const Practice = (props) => {
   const {searchInput,
@@ -21,6 +22,7 @@ const Practice = (props) => {
     letterColors,
     hits,
     misses,
+    phrase,
     user} = usePractice(props)
 
     return (
@@ -34,12 +36,15 @@ const Practice = (props) => {
       ></meta>
     </Head>
         <h1>Practice Test</h1>
-        <Image className={startTimer && !expired ? `${styles.hourglass} ${styles.spinning}`: `${styles.hourglass} `} src="/icons/hourglass.svg" width="100" height="100" alt="hourglass" />
+        <Image
+          className={startTimer && !expired ? `${styles.hourglass} ${styles.spinning}`: `${styles.hourglass} `}
+          src="/icons/hourglass.svg" 
+          width="100"
+          height="100"
+          alt="hourglass" 
+        />
         <h3><span className={styles.timer}>{counter}</span> seconds left</h3>
-        <p>{wpm} this is how many wpm</p>
-        <p>we can put user stats like avg wpm here</p>
-        {hits} {misses}
-        <p>{user ? user.firstName : 'nothin...'}</p>
+        <p>{user ? user.firstName : 'Sign in to save your stats'}</p>
 
         <textarea
             ref={searchInput}
@@ -52,9 +57,13 @@ const Practice = (props) => {
         >
         </textarea>
         <div className={styles.testPhrase}>
-            <section>
-              {letterColors}
-            </section>
+        {!expired
+            ?
+                <section>
+                  {letterColors}
+                </section>
+            : <section style={{width: '90vw'}}><Stats hits={hits} misses={misses} wpm={wpm} phrase={value}/></section>
+        }
         </div>
         <button onClick={() => setStartTimer(!startTimer)}>start/stop timer</button>
         <button onClick={() => handleReset()}>reset</button>
