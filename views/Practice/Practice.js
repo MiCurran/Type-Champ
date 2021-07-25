@@ -8,7 +8,20 @@ import Image from 'next/image';
 import usePractice from "./usePractice";
 
 const Practice = (props) => {
-  const {searchInput, startTimer, counter, wpm, expired, value, valueArray, phraseArray, handleChooseRandomPhrase, handleReset, handleValueChange, setStartTimer} = usePractice(props)
+  const {searchInput,
+    startTimer,
+    counter,
+    wpm,
+    expired,
+    value,
+    handleChooseRandomPhrase,
+    handleReset,
+    handleValueChange,
+    setStartTimer,
+    letterColors,
+    hits,
+    misses,
+    user} = usePractice(props)
 
     return (
   <div className={styles.container}>
@@ -24,6 +37,9 @@ const Practice = (props) => {
         <Image className={startTimer && !expired ? `${styles.hourglass} ${styles.spinning}`: `${styles.hourglass} `} src="/icons/hourglass.svg" width="100" height="100" alt="hourglass" />
         <h3><span className={styles.timer}>{counter}</span> seconds left</h3>
         <p>{wpm} this is how many wpm</p>
+        <p>we can put user stats like avg wpm here</p>
+        {hits} {misses}
+        <p>{user ? user.firstName : 'nothin...'}</p>
 
         <textarea
             ref={searchInput}
@@ -36,46 +52,10 @@ const Practice = (props) => {
         >
         </textarea>
         <div className={styles.testPhrase}>
-            <p>
-              {phraseArray.map((letter, index)=> {
-                if(!valueArray[index]){
-                return(
-                  <span className={styles.gray} key={index}>{letter}</span>
-                )}
-                if (index === (valueArray.length - 1) && valueArray[index] === ' '){
-                  return (
-                    <span key={index} className={letter === valueArray[index] ?  `${styles.green} ${styles.activeLetterSpace}` : `${styles.red} ${styles.activeLetterSpace}`}>
-                      {valueArray[index]}
-                    </span>
-                  )
-                }
-                if (index === (valueArray.length - 1) && valueArray[index - 1] === ' '){
-                  return (
-                    <span key={index} className={letter === valueArray[index] ? `${styles.green} ${styles.activeLetterAfterSpace}` : `${styles.red} ${styles.activeLetterAfterSpace}`}>
-                      {valueArray[index]}
-                    </span>
-                  )
-                }
-                if (index === (valueArray.length - 1)){
-                  return (
-                    <span key={index} className={letter === valueArray[index] ? `${styles.green} ${styles.activeLetter}` : `${styles.red} ${styles.activeLetter}`}>
-                        {letter}
-                    </span>
-                  )
-                } 
-                else {
-                  return (
-                    <span key={index} className={letter === valueArray[index] ? styles.green : styles.red}>
-                    {letter}
-                  </span>
-                  )
-                }
-              })}
-            </p>
+            <section>
+              {letterColors}
+            </section>
         </div>
-        {/* <Highlight className='javascript'>
-  {phrase}
-</Highlight> */}
         <button onClick={() => setStartTimer(!startTimer)}>start/stop timer</button>
         <button onClick={() => handleReset()}>reset</button>
         <button onClick={() => handleChooseRandomPhrase()}>new test</button>

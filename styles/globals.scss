@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap");
+@import 'variables/fonts';
+@import 'variables/colors';
 
 html,
 body {
@@ -21,4 +23,28 @@ a {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.red {
+  color: $danger;
+}
+
+.green {
+  color: $successfulLetter;
+}
+
+.gray {
+  color: rgba(224, 224, 224, 0.616);
+}
+
+.activeLetter {
+  max-width: 15px!important;
+}
+
+.activeLetterAfterSpace {
+  max-width: 15px!important;
+}
+
+.spaceActive {
+  border-right: 2px solid rgb(25, 0, 255);
 }

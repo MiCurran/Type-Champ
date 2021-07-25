@@ -1,8 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { getRandomWordsPhrase } from '../../lib/utils/getRandomWords';
+import { getLetterColors } from "../../lib/utils/getLetterColors";
 
-const usePractice = () => {
+const usePractice = (props) => {
+    const { user } = props;
     const searchInput = useRef(null);
     const router = useRouter();
     const counterInitState = 30;
@@ -13,6 +15,9 @@ const usePractice = () => {
     const [value, setValue] = useState('');
     const valueArray = value.split('');
     const phraseArray = phrase.split('');
+    const letterColors = getLetterColors(phraseArray, valueArray);
+    const [hits, setHits] = useState(0);
+    const [misses, setMisses] = useState(0);
 
     const handleChooseRandomPhrase = () => {
       setPhrase(getRandomWordsPhrase());
@@ -30,8 +35,20 @@ const usePractice = () => {
     const [wpm, setWpm] = useState(0);
 
     const handleValueChange = (value) => {
+      const valA = value.split('')
+      if (valA[value.length-1] === phraseArray[value.length - 1]) {
+        const newHits = hits + 1
+        console.log('hit')
+        setHits(newHits);
+        // so here we need to do edit a hit state which will be correct letters
+      } else {
+        const newMisses = misses + 1
+        console.log('miss'); // here we need to add a miss state which will be errored letters 
+        setMisses(newMisses);
+      }
       setValue(value);
       // we need to also check here if the last typed character of value 
+
     };
 
     const handleReset = () => {
@@ -39,6 +56,8 @@ const usePractice = () => {
       setStartTimer(false);
       setExpired(false);
       setValue('');
+      setHits(0);
+      setMisses(0);
     };
 
     const timerHandler = () => {
@@ -69,14 +88,16 @@ const usePractice = () => {
         handleReset,
         setStartTimer,
         handleChooseRandomPhrase,
-        valueArray,
-        phraseArray,
         startTimer,
         counter,
         wpm,
         expired,
         value,
-        searchInput
+        searchInput,
+        user,
+        letterColors,
+        hits,
+        misses
 
     };
 };
