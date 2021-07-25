@@ -36,13 +36,39 @@ const Practice = (props) => {
       ></meta>
     </Head>
         <h1>Practice Test</h1>
+        {!expired 
+          ?(
+<div className="row">
         <Image
+          className={startTimer && !expired ? `${styles.sword} ${styles.fighting}`: `${styles.sword} `}
+          src="/sword.svg" 
+          width="100"
+          height="100"
+          alt="hourglass" 
+        />
+        <Image
+          className={startTimer && !expired ? `${styles.swordFlipped} ${styles.fighting}`: `${styles.swordFlipped} `}
+          src="/sword.svg" 
+          width="100"
+          height="100"
+          alt="hourglass" 
+        />
+        </div>
+          )
+          : (<Image
+            src="/win.svg" 
+            width="200"
+            height="200"
+            alt="Win Image" 
+          />)
+        }
+        {/* <Image
           className={startTimer && !expired ? `${styles.hourglass} ${styles.spinning}`: `${styles.hourglass} `}
           src="/icons/hourglass.svg" 
           width="100"
           height="100"
           alt="hourglass" 
-        />
+        /> */}
         <h3><span className={styles.timer}>{counter}</span> seconds left</h3>
         <p>{user ? user.firstName : 'Sign in to save your stats'}</p>
 

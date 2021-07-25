@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { getRandomWordsPhrase } from '../../lib/utils/getRandomWords';
-import { getLetterColors } from "../../lib/utils/getLetterColors";
+import { getLetterColors } from '../../lib/utils/getLetterColors';
 
 const usePractice = (props) => {
     const { user } = props;
@@ -17,6 +17,7 @@ const usePractice = (props) => {
     const letterColors = getLetterColors(phraseArray, valueArray);
     const [hits, setHits] = useState(0);
     const [misses, setMisses] = useState(0);
+    const [mode, setMode] = useState({id: 1, label: 'medium'}) // so here we should have mode states 1 = easy 2 = medium 3 = hard
 
     const handleChooseRandomPhrase = () => {
       setPhrase(getRandomWordsPhrase());
@@ -28,7 +29,7 @@ const usePractice = (props) => {
     const determineWPM = (value, time) => {
       const adjustedTime = (counterInitState / counterInitState) / 2 
       const words = value.length / 5;
-      const wpm = words / adjustedTime;
+      const wpm = Math.floor(words / adjustedTime);
       return wpm
     };
     const [wpm, setWpm] = useState(0);
