@@ -22,7 +22,7 @@ const Practice = (props) => {
     letterColors,
     hits,
     misses,
-    phrase,
+    mode,
     user} = usePractice(props)
 
     return (
@@ -35,7 +35,8 @@ const Practice = (props) => {
         content="width=device-width, initial-scale=1.0"
       ></meta>
     </Head>
-        <h1>Practice Test</h1>
+        <h1>Type Warrior</h1>
+        <p>Fight the clock or fight mistakes!</p>
         {!expired 
           ?(
 <div className="row">
@@ -56,22 +57,15 @@ const Practice = (props) => {
         </div>
           )
           : (<Image
-            src="/win.svg" 
+            src={misses <= mode.details.missesAllowed ? '/win.svg' : '/lose.svg'}
             width="200"
             height="200"
             alt="Win Image" 
           />)
         }
-        {/* <Image
-          className={startTimer && !expired ? `${styles.hourglass} ${styles.spinning}`: `${styles.hourglass} `}
-          src="/icons/hourglass.svg" 
-          width="100"
-          height="100"
-          alt="hourglass" 
-        /> */}
-        <h3><span className={styles.timer}>{counter}</span> seconds left</h3>
-        <p>{user ? user.firstName : 'Sign in to save your stats'}</p>
-
+        <h3><span className={styles.timer}>{counter}</span></h3>
+        {/* <p>{user ? user.firstName : 'Sign in to save your stats'}</p>
+ */}
         <textarea
             ref={searchInput}
             style={{opacity: 0.01}}
@@ -85,7 +79,7 @@ const Practice = (props) => {
         <div className={styles.testPhrase}>
         {!expired
             ?
-                <section>
+                <section className={styles.scrollingLetterSection}>
                   {letterColors}
                 </section>
             : <section style={{width: '90vw'}}><Stats hits={hits} misses={misses} wpm={wpm} phrase={value}/></section>

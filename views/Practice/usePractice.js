@@ -17,7 +17,7 @@ const usePractice = (props) => {
     const letterColors = getLetterColors(phraseArray, valueArray);
     const [hits, setHits] = useState(0);
     const [misses, setMisses] = useState(0);
-    const [mode, setMode] = useState({id: 1, label: 'medium'}) // so here we should have mode states 1 = easy 2 = medium 3 = hard
+    const [mode, setMode] = useState({difficulty: 2, details: {label: 'medium', missesAllowed: 10}}) // so here we should have mode states 1 = easy 2 = medium 3 = hard
 
     const handleChooseRandomPhrase = () => {
       setPhrase(getRandomWordsPhrase());
@@ -89,7 +89,8 @@ const usePractice = (props) => {
         hits,
         misses,
         phrase,
-        value
+        value,
+        mode
 
     };
 };
