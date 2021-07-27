@@ -9,10 +9,10 @@ const TestPage = (props) => {
                 <Test {...props}/>
             </SignedIn>
             <SignedOut>
-                <p>you must sign in to take a test and save your scores</p>        
+                <p>you must sign in to take a test and save your scores</p>
             </SignedOut>
         </>
-    )
+    );
 };
 
 export default TestPage;
