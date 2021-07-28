@@ -43,10 +43,7 @@
     padding: 10px 0;
     font-size: 2rem;
     font-weight: 700;
-  }
-  span:first-child {
-    text-transform: capitalize;
-  }    
+  } 
 }
 
 .red {
@@ -69,19 +66,55 @@
   max-width: 15px!important;
 }
 
-.spaceActive {
-  border-right: 2px solid rgb(25, 0, 255);
-}
-
 .timer {
   font-size: 5rem;
 }
 
 .row {
   width: 50%;
+  height: 200px;
   margin: 90px 0;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-content: space-around;
+}
+
+.swordFlipped {
+  transform: rotate(-90deg);
+}
+
+.swordFlipped.fighting {
+  animation-name: rightSword;  /* Refers to the name of your @keyframes element below */
+  animation-duration: 2.5s;        /* Change to speed up or slow down */
+  animation-iteration-count: infinite;  /* Never stop waving :) */
+  //transform-origin: 70% 70%;       /* Pivot around the bottom-left palm */
+  display: inline-block;
+}
+.sword.fighting {
+  animation-name: leftSword;  /* Refers to the name of your @keyframes element below */
+  animation-duration: 2.5s;        /* Change to speed up or slow down */
+  animation-iteration-count: infinite;  /* Never stop waving :) */
+  //transform-origin: 70% 70%;       /* Pivot around the bottom-left palm */
+  display: inline-block;
+}
+
+@keyframes leftSword {
+  0% { transform: rotate( -45.0deg) }
+ 25% { transform: rotate(0.0deg) }  /* The following five values can be played with to make the waving more or less extreme */
+ 50% { transform: rotate(-45.0deg) }
+ 75% { transform: rotate(0.0deg) }  /* Reset for the last half to pause */
+100% { transform: rotate(-45.0deg) }
+}
+
+@keyframes rightSword {
+  0% { transform: rotate( -90.0deg) }
+ 25% { transform: rotate(-45.0deg) }  /* The following five values can be played with to make the waving more or less extreme */
+ 50% { transform: rotate(-90.0deg) }
+ 75% { transform: rotate(-45.0deg) }  /* Reset for the last half to pause */
+100% { transform: rotate(-90.0deg) }
+}
+
+.scrollingLetterSection {
+// to do
 }

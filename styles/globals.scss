@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap");
+@import 'variables/fonts';
+@import 'variables/colors';
 
 html,
 body {
@@ -21,4 +23,51 @@ a {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.red {
+  color: $danger;
+}
+
+.green {
+  color: $successfulLetter;
+}
+
+.gray {
+  color: rgba(224, 224, 224, 0.616);
+}
+
+.activeLetter {
+  max-width: 15px!important;
+}
+
+.activeLetterAfterSpace {
+  max-width: 15px!important;
+}
+
+.cursor {
+  background-color: $warning;
+  display: inline-block;
+  width: 3px;
+  height: 40px;
+  margin-bottom: -10px;
+  margin-left: 0px;
+  animation-name: blink;  /* Refers to the name of your @keyframes element below */
+  animation-duration: 1s;        /* Change to speed up or slow down */
+  animation-iteration-count: infinite;  /* Never stop waving :) */
+  //transform-origin: 70% 70%;       /* Pivot around the bottom-left palm */
+}
+
+@keyframes blink {
+  0% { opacity: 1 }
+ 25% { opacity: .5 }  /* The following five values can be played with to make the waving more or less extreme */
+ 50% { opacity: 0 }
+ 75% { opacity: .5 }  /* Reset for the last half to pause */
+100% { opacity: 1 }
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  min-height: 150px;
 }
