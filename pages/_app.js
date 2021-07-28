@@ -23,7 +23,7 @@ const theme = extendTheme({ colors });
  *  "/foo/bar"       for pages/foo/bar.js
  *  "/foo/[...bar]"  for pages/foo/[...bar].js
  */
-const publicPages = ['/', '/sign-in/[[...index]]', '/sign-up/[[...index]]', '/practice', '/test'];
+const publicPages = ['/', '/sign-in/[[...index]]', '/sign-up/[[...index]]', '/practice', '/test', '/create-user'];
 
 const MyApp = ({ Component, pageProps }) => {
     const router = useRouter();
