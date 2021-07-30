@@ -20,8 +20,8 @@ const Header = () => (
             </Link>
         </div>
         <div className={styles.right}>
-            <Link href="/">Rankings</Link>
-            <Link href="/">My Warrior</Link>
+            <Link href="/rankings">Rankings</Link>
+            {/* <Link href="/">My Warrior</Link> */}
             <SignedOut>
                 <Link href="/sign-in">Sign in</Link>
             </SignedOut>

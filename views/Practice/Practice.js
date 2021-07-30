@@ -7,7 +7,7 @@ import { useUser } from '@clerk/clerk-react';
 import Image from 'next/image';
 import usePractice from './usePractice';
 import { Stats } from './components/stats';
-import { Box, Heading, Button, Text, Center, VStack, List, ListItem, ListIcon, OrderedList, HStack, } from '@chakra-ui/react';
+import { Box, Heading, Button, VStack, HStack, } from '@chakra-ui/react';
 import { MdReplay } from 'react-icons/md';
 const Practice = (props) => {
     const { searchInput,
@@ -24,8 +24,18 @@ const Practice = (props) => {
         hits,
         misses,
         mode,
+        submitUserWpm,
         user } = usePractice(props);
     
+    const warrior = { 'id': 1,
+        'experience': 5.83,
+        'avg-wpm': 100,
+        'tests': [100],
+        'clerkID': null,
+        'updatedAt': '2021-07-29',
+        'displayName': 'Jimmy Crack Corn',
+        'avg-mistakes': 2,
+        'mistakes': [2] };
     return (
         <div className={styles.container}>
             <Head>
@@ -87,13 +97,21 @@ const Practice = (props) => {
                             {letterColors}
                         </section>
                     )
-                    : <section style={{ width: '90vw' }}><Stats hits={hits} misses={misses} wpm={wpm} phrase={value}/></section>
+                    : <Stats hits={hits} misses={misses} wpm={wpm} phrase={value}/>
                 }
             </Box>
             <HStack>
-                <Button colorScheme="blue" variant="outline" onClick={() => setStartTimer(!startTimer)}>start/stop timer</Button>
-                <Button leftIcon={<MdReplay />} colorScheme="blue" variant="ghost" onClick={() => handleReset()}>reset</Button>
-                <Button colorScheme="blue" variant="solid" onClick={() => handleChooseRandomPhrase()}>new test</Button>
+                {!expired &&
+                    <Button colorScheme="blue" variant="outline" onClick={() => setStartTimer(true)}>start!</Button>
+                }
+                <Button leftIcon={<MdReplay />}colorScheme="blue" variant="solid" onClick={() => handleChooseRandomPhrase()}>
+                    {misses <= mode.details.missesAllowed ? 'new test' : 'try again'}
+                </Button>
+                { expired &&
+                    <Button disabled={!expired} colorScheme="blue" variant="solid" onClick={() => submitUserWpm(warrior, wpm, misses)}>
+                        submit
+                    </Button>
+                }
             </HStack>
             
         </div>
