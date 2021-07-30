@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Center, VStack, List, ListItem, ListIcon, OrderedList, } from '@chakra-ui/react';
+import { Box, Button, Heading, Text, Center, VStack, List, ListItem, ListIcon, OrderedList, } from '@chakra-ui/react';
 import Head from 'next/head';
 import Image from 'next/image';
 
@@ -33,10 +33,20 @@ const Rankings = (props) => {
                 <OrderedList
                     paddingTop="4"
                 >
-                    <ListItem><span>score</span> player one</ListItem>
-                    <ListItem><span>score</span> playher two</ListItem>
-                    <ListItem><span>score</span> player three</ListItem>
+                    {props.warriors &&
+                     props.warriors.map(warrior => {
+                         return (
+                             <ListItem
+                                 key={warrior.id}
+                             >
+                                 <span>{warrior[`avg-wpm`]}</span>
+                                 {warrior.displayName}
+                             </ListItem>
+                         );
+                     })
+                    }
                 </OrderedList>
+                <Button onClick={() => console.log(props)}>log</Button>
             </VStack>
         </VStack>
     );
