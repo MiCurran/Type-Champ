@@ -7,7 +7,7 @@ const RankingsPage = (props) => (<Rankings {...props} />);
 export async function getServerSideProps(context) {
     let warriors = [];
     const fetchHighScores = async () => {
-        await axios.get(`${GETHIGHSCORES}?type=wpm`)
+        await axios.get(`${PRODURL}${GETHIGHSCORES}?type=wpm`)
             .then(res => {
                 warriors = res.data.warriors;
                 return true;
