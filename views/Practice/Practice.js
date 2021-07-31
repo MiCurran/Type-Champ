@@ -7,8 +7,11 @@ import { useUser } from '@clerk/clerk-react';
 import Image from 'next/image';
 import usePractice from './usePractice';
 import { Stats } from './components/stats';
-import { Box, Heading, Button, VStack, HStack, } from '@chakra-ui/react';
+import { Box, Heading, Button, VStack, HStack, Text } from '@chakra-ui/react';
 import { MdReplay } from 'react-icons/md';
+import { useDisclosure } from '@chakra-ui/react';
+import { ModeModal } from './components/modeModal';
+
 const Practice = (props) => {
     const { searchInput,
         startTimer,
@@ -17,7 +20,6 @@ const Practice = (props) => {
         expired,
         value,
         handleChooseRandomPhrase,
-        handleReset,
         handleValueChange,
         setStartTimer,
         letterColors,
@@ -25,17 +27,16 @@ const Practice = (props) => {
         misses,
         mode,
         submitUserWpm,
+        missedLetters,
+        mostFrequentMiss,
+        frequencyOfMostFrequentMiss,
+        determineWin,
+        difficulty,
+        setDifficulty,
+        setMode,
         user } = usePractice(props);
+    const { isOpen, onOpen, onClose } = useDisclosure();
     
-    const warrior = { 'id': 1,
-        'experience': 5.83,
-        'avg-wpm': 100,
-        'tests': [100],
-        'clerkID': null,
-        'updatedAt': '2021-07-29',
-        'displayName': 'Jimmy Crack Corn',
-        'avg-mistakes': 2,
-        'mistakes': [2] };
     return (
         <div className={styles.container}>
             <Head>
@@ -71,7 +72,7 @@ const Practice = (props) => {
                 : (
                     <VStack>
                         <Image
-                            src={misses <= mode.details.missesAllowed ? '/win.svg' : '/lose.svg'}
+                            src={determineWin(mode, difficulty, { wpm: wpm, misses: misses }) ? '/win.svg' : '/lose.svg'}
                             width="200"
                             height="200"
                             alt="Win Image"
@@ -97,7 +98,18 @@ const Practice = (props) => {
                             {letterColors}
                         </section>
                     )
-                    : <Stats hits={hits} misses={misses} wpm={wpm} phrase={value}/>
+                    : (
+                        <Stats
+                            mostFrequentMiss={mostFrequentMiss}
+                            frequencyOfMostFrequentMiss={frequencyOfMostFrequentMiss}
+                            missedLetters={missedLetters}
+                            user={user}
+                            hits={hits}
+                            misses={misses}
+                            wpm={wpm}
+                            phrase={value}
+                        />
+                    )
                 }
             </Box>
             <HStack>
@@ -105,15 +117,26 @@ const Practice = (props) => {
                     <Button colorScheme="blue" variant="outline" onClick={() => setStartTimer(true)}>start!</Button>
                 }
                 <Button leftIcon={<MdReplay />}colorScheme="blue" variant="solid" onClick={() => handleChooseRandomPhrase()}>
-                    {misses <= mode.details.missesAllowed ? 'new test' : 'try again'}
+                    {expired && !determineWin(mode, difficulty, { wpm: wpm, misses: misses }) ? 'try again' : 'new test'}
                 </Button>
-                { expired &&
-                    <Button disabled={!expired} colorScheme="blue" variant="solid" onClick={() => submitUserWpm(warrior, wpm, misses)}>
+                { expired && user &&
+                    <Button disabled={!expired} colorScheme="blue" variant="solid" onClick={() => submitUserWpm(user, wpm, misses)}>
                         submit
                     </Button>
                 }
+                
             </HStack>
-            
+            <HStack>
+                <Button onClick={onOpen}>Game Settings</Button>
+            </HStack>
+            <ModeModal
+                isOpen={isOpen}
+                onClose={onClose}
+                setDifficulty={setDifficulty}
+                mode={mode}
+                difficulty={difficulty}
+                setMode={setMode}
+            />
         </div>
     );
 };

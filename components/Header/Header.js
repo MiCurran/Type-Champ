@@ -20,7 +20,8 @@ const Header = () => (
             </Link>
         </div>
         <div className={styles.right}>
-            <Link href="/rankings">Rankings</Link>
+            <Link href="/">Home</Link>
+            <Link href="/rankings">High-Scores</Link>
             {/* <Link href="/">My Warrior</Link> */}
             <SignedOut>
                 <Link href="/sign-in">Sign in</Link>

@@ -1,40 +1,64 @@
-import { Box, Button, Heading, Text, Center, VStack, List, ListItem, ListIcon, OrderedList, } from '@chakra-ui/react';
+import { Box, Button, Heading, Text, Center, VStack, HStack, List, ListItem, ListIcon, OrderedList, } from '@chakra-ui/react';
 import Head from 'next/head';
 import Image from 'next/image';
 
 const Rankings = (props) => {
 
     return (
-        <VStack>
+        <VStack backgroundColor="gray" style={{ minHeight: '100vh' }}>
             <Head>
-                <title>Type Warrior Rankings</title>
+                <title>High Scores</title>
                 <link rel="icon" href="/favicon.ico" />
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 ></meta>
             </Head>
-            <Box>
-                <Center>
-                    <Heading as="h1">Type Warrior</Heading>
-                </Center>
-                <Text fontSize="lg">Fight the clock or fight mistakes!</Text>
+            <Box margin="50px">
+                <VStack>
+                    <Image
+                        src="/ranking.svg"
+                        width="150"
+                        height="150"
+                        alt="hourglass"
+                    />
+                    <Heading as="h1">High Scores</Heading>
+                </VStack>
             </Box>
-            <VStack>
-                <Image
-                    src="/ranking.svg"
-                    width="100"
-                    height="100"
-                    alt="hourglass"
-                />
-                <Heading as="h2">Rankings</Heading>
-            </VStack>
+            <HStack margin="5">
+                <VStack>
+                    <Heading>
+                        <Image
+                            src="/esports.svg"
+                            width="50"
+                            height="50"
+                            alt="hourglass"
+                        />
+                        Today's Tip Top Typer
+                        <Image
+                            src="/esports.svg"
+                            width="50"
+                            height="50"
+                            alt="hourglass"
+                        />
+                    </Heading>
+                    <Heading>
+                        <Image
+                            src="/medal.svg"
+                            width="25"
+                            height="25"
+                            alt="hourglass"
+                        />
+                        {props.warriors[0].displayName}
+                    </Heading>
+                </VStack>
+            </HStack>
             <VStack>
                 <OrderedList
                     paddingTop="4"
                 >
                     {props.warriors &&
-                     props.warriors.map(warrior => {
+                     props.warriors.map((warrior, index) => {
                          return (
                              <ListItem
                                  key={warrior.id}
@@ -46,7 +70,6 @@ const Rankings = (props) => {
                      })
                     }
                 </OrderedList>
-                <Button onClick={() => console.log(props)}>log</Button>
             </VStack>
         </VStack>
     );
