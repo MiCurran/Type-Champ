@@ -4,6 +4,10 @@ import axios from 'axios';
 
 const useCreateUser = (props) => {
     const router = useRouter();
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
+    const [eMessage, setEMessage] = useState('');
+
    
     const submitCreateUser = (clerkID, displayName) => {
         if (clerkID && displayName) {
@@ -12,17 +16,22 @@ const useCreateUser = (props) => {
                 clerkID: clerkID,
             })
                 .then(function (response) {
-                    console.log(response);
-                    router.push('/');
+                    setSubmitted(true);
+                    setTimeout(router.push('/'), 7_000);
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    setError(true);
+                    setEMessage(error);
                 });
         }
     };
 
     return {
-        submitCreateUser
+        submitCreateUser,
+        submitted,
+        setSubmitted,
+        error,
+        eMessage
     };
 };
 

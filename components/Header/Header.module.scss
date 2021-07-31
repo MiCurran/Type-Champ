@@ -22,10 +22,18 @@
 .right {
   display: flex;
   align-items: center;
+
+}
+
+.right {
+  color: antiquewhite;
+  font-weight: 700;
+  letter-spacing: .2rem;
 }
 
 .right > :not(:first-child) {
   margin-left: 1rem;
+
 }
 
 @media screen and (min-width: 768px) {
