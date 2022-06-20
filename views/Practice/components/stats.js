@@ -5,12 +5,13 @@ export const Stats = (props) => {
     const { hits, misses, wpm, phrase, user, missedLetters, mostFrequentMiss, frequencyOfMostFrequentMiss } = { ...props };
     const accuracy = Math.floor(((phrase.length - misses) / phrase.length) * 100);
     return (
-        <Box width="500px">
-            <Box borderWidth="2px" borderRadius="lg" overflow="hidden">
+        <Box width="500px" >
+            <Box
+                px={10}
+                py={4}
+                bgColor={'whiteAlpha.700'}
+                borderWidth="2px" borderRadius="lg" overflow="hidden">
                 <Center><Heading as="h2">Stats</Heading></Center>
-                {!user &&
-                <Text>Sign in to save</Text>
-                }
                 <Box width="100%">
                     <VStack alignItems="start">
                         <Text>Correct characters:</Text>
@@ -25,8 +26,6 @@ export const Stats = (props) => {
                     <VStack alignItems="start">
                         <Text>Accuracy</Text>
                         <Heading>{accuracy} %</Heading>
-                        <p>{missedLetters.map(letter => letter)}</p>
-                        <Text>you mistyped the letter {mostFrequentMiss} {frequencyOfMostFrequentMiss} times</Text>
                     </VStack>
                 </Box>
             </Box>

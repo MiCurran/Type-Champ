@@ -124,11 +124,11 @@ const Practice = (props) => {
                         submit
                     </Button>
                 }
-                
-            </HStack>
-            <HStack>
+                            <HStack>
                 <Button onClick={onOpen}>Game Settings</Button>
             </HStack>
+            </HStack>
+
             <ModeModal
                 isOpen={isOpen}
                 onClose={onClose}
