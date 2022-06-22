@@ -47,9 +47,8 @@ const Practice = (props) => {
                     content="width=device-width, initial-scale=1.0"
                 ></meta>
             </Head>
-            <Heading as="h1">Type Warrior</Heading>
-            <Heading textColor="gray.500" as="h3">Fight the clock or fight mistakes!</Heading>
-            {!expired && <Heading as="h3"><span className={styles.timer}>{counter}</span></Heading>}
+            <Heading textColor="purple.200" as="h3">Fight the clock or fight mistakes!</Heading>
+            {!expired && <Heading as="h3" color={'yellow.200'}><span className={styles.timer}>{counter}</span></Heading>}
             {!expired
                 ? (
                     <div className="row">
@@ -73,8 +72,8 @@ const Practice = (props) => {
                     <VStack>
                         <Image
                             src={determineWin(mode, difficulty, { wpm: wpm, misses: misses }) ? '/win.svg' : '/lose.svg'}
-                            width="200"
-                            height="200"
+                            width="100"
+                            height="100"
                             alt="Win Image"
                         />
                     </VStack>
@@ -89,8 +88,7 @@ const Practice = (props) => {
                 value={value}
                 onKeyDown={() => setStartTimer(true)}
                 onChange={(e) => handleValueChange(e.target.value)}
-            >
-            </textarea>
+            />
             <Box className={styles.testPhrase}>
                 {!expired
                     ? (
