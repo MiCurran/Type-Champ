@@ -84,6 +84,7 @@ const Practice = (props) => {
                 ref={searchInput}
                 style={{ opacity: 0.01 }}
                 autoFocus
+                tabIndex={!expired ? 1 : 3}
                 disabled={expired}
                 value={value}
                 onKeyDown={() => setStartTimer(true)}
@@ -114,7 +115,15 @@ const Practice = (props) => {
                 {!expired &&
                     <Button colorScheme="blue" variant="outline" onClick={() => setStartTimer(true)}>start!</Button>
                 }
-                <Button leftIcon={<MdReplay />}colorScheme="blue" variant="solid" onClick={() => handleChooseRandomPhrase()}>
+                <Button
+                    tabIndex={expired ? 1 : 3}
+                    leftIcon={
+                        <MdReplay />
+                    }
+                    colorScheme="blue"
+                    variant="solid"
+                    onClick={() => handleChooseRandomPhrase()}
+                >
                     {expired && !determineWin(mode, difficulty, { wpm: wpm, misses: misses }) ? 'try again' : 'new test'}
                 </Button>
                 { expired && user &&
