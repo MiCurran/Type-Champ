@@ -44,6 +44,8 @@ const usePractice = (props) => {
     const missesDifficulty = [15, 5, 0];
     const wpmDifficulty = [40, 70, 100];
 
+    // so we should map these out to buttons?
+
     const determineWin = (mode, difficulty, score) => {
         //score should be an object {wpm, misses}
         if (mode === 'misses') {
@@ -167,6 +169,8 @@ const usePractice = (props) => {
         mode,
         submitUserWpm,
         missedLetters,
+        missesDifficulty,
+        wpmDifficulty,
         mostFrequentMiss,
         frequencyOfMostFrequentMiss,
         determineWin,
