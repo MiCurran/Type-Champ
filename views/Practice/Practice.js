@@ -47,7 +47,7 @@ const Practice = (props) => {
                     content="width=device-width, initial-scale=1.0"
                 ></meta>
             </Head>
-            <Heading textColor="purple.200" as="h3">Fight the clock or fight mistakes!</Heading>
+            <Heading textColor="purple.200" as="h3">Fight the <Text as={'span'}  textDecoration={mode === 'wpm' ? 'underline' : 'unset'} textDecorationColor={'yellow.100'}>clock </Text> or fight <Text as={'span'} textDecoration={mode === 'misses' ? 'underline' : 'unset'} textDecorationColor={'yellow.100'}> mistakes</Text>!</Heading>
             <Box>
             <VStack
                bgGradient= {`linear(to-r, purple.100, purple.300)`}
@@ -69,8 +69,8 @@ const Practice = (props) => {
                 :(
                     <>
                     <IconButton bg={'transparent'} _hover={{bgColor: 'transparent'}} icon={<FaWindowClose />} onClick={onClose}></IconButton>
-                        <VStack>
-                            <Heading> Game Mode</Heading>
+                        <VStack padding={5}>
+                            <Heading fontSize={'xl'}> Game Mode</Heading>
                             <HStack>
                                 <Text onClick={() => setMode('wpm')} cursor="pointer" textColor={mode === 'wpm' ? 'black' : 'gray'}
                                     fontWeight={mode === 'wpm' ? '700' : '500'}
@@ -84,8 +84,8 @@ const Practice = (props) => {
                                 </Text>
                             </HStack>
                         </VStack>
-                        <VStack>
-                            <Heading>Difficulty</Heading>
+                        <VStack padding={5}>
+                            <Heading fontSize={'xl'}>Difficulty</Heading>
                             <HStack>
                                 <Text cursor="pointer"
                                     onClick={() => setDifficulty(0)} textColor={difficulty === 0 ? 'black' : 'gray'}
@@ -175,8 +175,19 @@ const Practice = (props) => {
             </Box>
             <HStack>
                 {!expired &&
-                    <Button  w={'xs'} rounded={'2xl'} border={'2px solid #E9D8FD'} bgGradient='linear(to-r, purple.100, purple.300)'
-                    bgClip='text'variant={'outline'} onClick={() => setStartTimer(true)}>Start!</Button>
+                    <Button
+
+                        w={'xs'} rounded={'2xl'} border={'2px solid #E9D8FD'} 
+                        bgGradient='linear(to-r, purple.100, purple.300)'
+                        bgClip='text' 
+                        variant={'outline'}
+                        _hover={{
+                            color: 'purple'
+                        }}
+                        onClick={() => setStartTimer(true)}
+                    >
+                        Start!
+                    </Button>
                 }
                 <Button
                 w={'xs'}
@@ -195,7 +206,7 @@ const Practice = (props) => {
                     <Button 
                         rounded={'2xl'}
                         disabled={!expired} colorScheme="purple" variant="solid" onClick={() => submitUserWpm(user, wpm, misses)}>
-                        submit
+                        Submit
                     </Button>
                 }
             </HStack>
