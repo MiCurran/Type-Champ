@@ -1,16 +1,13 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from './Practice.module.scss';
-import { SignedIn, SignedOut } from '@clerk/clerk-react';
 import { useEffect, useState, useRef } from 'react';
-import { useUser } from '@clerk/clerk-react';
 import Image from 'next/image';
 import usePractice from './usePractice';
 import { Stats } from './components/stats';
 import { Box, Heading, Button, VStack, HStack, Text, IconButton } from '@chakra-ui/react';
 import { MdReplay } from 'react-icons/md';
 import { useDisclosure } from '@chakra-ui/react';
-import { ModeModal } from './components/modeModal';
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {FaWindowClose} from 'react-icons/fa';
 const Practice = (props) => {
