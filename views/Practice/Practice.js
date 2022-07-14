@@ -51,7 +51,7 @@ const Practice = (props) => {
             <Box>
             <VStack
                bgGradient= {`linear(to-r, purple.100, purple.300)`}
-                p={4}
+                p={2}
                 rounded={'2xl'}
                 position={'absolute'}
                 left={'0.5'}
@@ -175,21 +175,26 @@ const Practice = (props) => {
             </Box>
             <HStack>
                 {!expired &&
-                    <Button colorScheme="blue" variant="outline" onClick={() => setStartTimer(true)}>start!</Button>
+                    <Button  w={'xs'} rounded={'2xl'} border={'2px solid #E9D8FD'} bgGradient='linear(to-r, purple.100, purple.300)'
+                    bgClip='text'variant={'outline'} onClick={() => setStartTimer(true)}>Start!</Button>
                 }
                 <Button
+                w={'xs'}
+                    rounded={'2xl'}
                     tabIndex={expired ? 1 : 3}
                     leftIcon={
                         <MdReplay />
                     }
-                    colorScheme="blue"
+                    bgGradient= {`linear(to-r, purple.100, purple.300)`}
                     variant="solid"
                     onClick={() => handleChooseRandomPhrase()}
                 >
-                    {expired && !determineWin(mode, difficulty, { wpm: wpm, misses: misses }) ? 'try again' : 'new test'}
+                    {expired && !determineWin(mode, difficulty, { wpm: wpm, misses: misses }) ? 'Try Again' : 'New test'}
                 </Button>
                 { expired && user &&
-                    <Button disabled={!expired} colorScheme="blue" variant="solid" onClick={() => submitUserWpm(user, wpm, misses)}>
+                    <Button 
+                        rounded={'2xl'}
+                        disabled={!expired} colorScheme="purple" variant="solid" onClick={() => submitUserWpm(user, wpm, misses)}>
                         submit
                     </Button>
                 }
